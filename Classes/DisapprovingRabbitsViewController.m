@@ -187,7 +187,7 @@ static NSString* kAppId = @"158131707534769";
 -(void)showADBanner {
 	[UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^(void){		
 		_bannerView.frame = CGRectMake(_bannerView.frame.origin.x,
-									   UIInterfaceOrientationIsLandscape(self.interfaceOrientation) ? 50 : 64,
+									   self.navigationController.navigationBar.frame.size.height + 20,
 									   _bannerView.frame.size.width,
 									   _bannerView.frame.size.height);
 	} completion:nil];

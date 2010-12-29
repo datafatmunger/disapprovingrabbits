@@ -21,6 +21,9 @@
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
 	<array>
+		<string>512x512.png</string>
+		<string>48x48.png</string>
+		<string>29x29.png</string>
 		<string>57x57.png</string>
 		<string>72x72.png</string>
 		<string>114x114.png</string>

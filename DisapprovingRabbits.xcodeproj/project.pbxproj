@@ -22,6 +22,8 @@
 		586AC6B7123EC221002FEBF7 /* 57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 586AC6B2123EC221002FEBF7 /* 57x57.png */; };
 		586AC6B8123EC221002FEBF7 /* 72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 586AC6B3123EC221002FEBF7 /* 72x72.png */; };
 		5892F151120D8FA6005CAF07 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5892F150120D8FA6005CAF07 /* Default.png */; };
+		58AC542312CBB5280068AF07 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 58AC542212CBB5280068AF07 /* Default-Portrait.png */; };
+		58AC548412CBB8740068AF07 /* 48x48.png in Resources */ = {isa = PBXBuildFile; fileRef = 58AC548312CBB8740068AF07 /* 48x48.png */; };
 		58B41E25120D52D000306261 /* libThree20Network.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B41DC5120D528B00306261 /* libThree20Network.a */; };
 		58B41E26120D52D300306261 /* libThree20Core.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B41DBC120D528300306261 /* libThree20Core.a */; };
 		58B41E27120D52D800306261 /* libThree20UI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B41DB3120D527600306261 /* libThree20UI.a */; };
@@ -372,6 +374,8 @@
 		5872B0C01237F01500CA912A /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "facebook-ios-sdk.xcodeproj"; path = "../facebook-ios-sdk/src/facebook-ios-sdk.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		5872B0D51237F02400CA912A /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
 		5892F150120D8FA6005CAF07 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		58AC542212CBB5280068AF07 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		58AC548312CBB8740068AF07 /* 48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 48x48.png; sourceTree = "<group>"; };
 		58B41D90120D527500306261 /* Three20UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20UI.xcodeproj; path = ../three20/src/Three20UI/Three20UI.xcodeproj; sourceTree = SOURCE_ROOT; };
 		58B41DB6120D528300306261 /* Three20Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Core.xcodeproj; path = ../three20/src/Three20Core/Three20Core.xcodeproj; sourceTree = SOURCE_ROOT; };
 		58B41DBF120D528B00306261 /* Three20Network.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Three20Network.xcodeproj; path = ../three20/src/Three20Network/Three20Network.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -471,6 +475,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				58AC542212CBB5280068AF07 /* Default-Portrait.png */,
 				58BFDBD8120D87D9007C2545 /* bg.png */,
 				5892F150120D8FA6005CAF07 /* Default.png */,
 				58D5E38F1233B93000234F6F /* Default@2x.png */,
@@ -501,6 +506,7 @@
 		586AC6AE123EC221002FEBF7 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				58AC548312CBB8740068AF07 /* 48x48.png */,
 				586AC6AF123EC221002FEBF7 /* 114x114.png */,
 				586AC6B0123EC221002FEBF7 /* 29x29.png */,
 				586AC6B1123EC221002FEBF7 /* 512x512.png */,
@@ -964,6 +970,8 @@
 				586AC6B6123EC221002FEBF7 /* 512x512.png in Resources */,
 				586AC6B7123EC221002FEBF7 /* 57x57.png in Resources */,
 				586AC6B8123EC221002FEBF7 /* 72x72.png in Resources */,
+				58AC542312CBB5280068AF07 /* Default-Portrait.png in Resources */,
+				58AC548412CBB8740068AF07 /* 48x48.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1095,9 +1103,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = DisapprovingRabbits_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
-				HEADER_SEARCH_PATHS = "../three20/Build/Products/three20/**";
+				HEADER_SEARCH_PATHS = (
+					"../facebook-ios-sdk/src/**",
+					"../three20/Build/Products/three20/**",
+				);
 				INFOPLIST_FILE = "DisapprovingRabbits-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = "-all_load";
