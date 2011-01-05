@@ -10,6 +10,13 @@
 #import "Three20Network/Three20Network.h"
 #import "Three20UI/Three20UI.h"
 
+@interface DisapprovingRabbitsDataSource : TTThumbsDataSource {
+
+}
+
+@end
+
+
 @interface DisapprovingRabbitsPhotoSource : TTURLRequestModel <TTPhotoSource> {
 	NSString* _title;
 	NSMutableArray* _photos;

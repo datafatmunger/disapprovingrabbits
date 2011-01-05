@@ -8,6 +8,14 @@
 
 #import "DisapprovingRabbitsPhotoSource.h"
 
+@implementation DisapprovingRabbitsDataSource
+
+- (NSInteger)columnCount {
+	return 4;
+}
+
+@end
+
 
 @implementation DisapprovingRabbitsPhotoSource
 

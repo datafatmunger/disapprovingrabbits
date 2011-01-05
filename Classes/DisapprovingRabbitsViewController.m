@@ -12,10 +12,28 @@
 
 static NSString* kAppId = @"158131707534769";
 
+@implementation DisapprovingRabbitsThumbsController
+
+- (void)updateTableLayout {
+	if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+		self.tableView.contentInset = UIEdgeInsetsMake(4, 0, 0, 0);
+		self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+	} else {
+		[super updateTableLayout];
+	}
+}
+
+- (id<TTTableViewDataSource>)createDataSource {
+	return [[[DisapprovingRabbitsDataSource alloc] initWithPhotoSource:_photoSource delegate:self] autorelease];
+}
+
+@end
+
 @implementation DisapprovingRabbitsViewController
 
 @synthesize bannerView = _bannerView;
 @synthesize facebook = _facebook;
+@synthesize popoverController;
 
 -(NSString*)flattenHTML:(NSString *)html {
 	
@@ -265,13 +283,22 @@ static NSString* kAppId = @"158131707534769";
 */
 
 -(void)reload {
-	currentTitle = [NSMutableString string];
-	currentDate = [NSMutableString string];
-	currentSummary = [NSMutableString string];
-	currentLink = [NSMutableString string];
+	[currentTitle release], currentTitle = [[NSMutableString alloc] init];
+	[currentDate release], currentDate = [[NSMutableString alloc] init];
+	[currentSummary release], currentSummary = [[NSMutableString alloc] init];
+	[currentLink release], currentLink = [[NSMutableString alloc] init];
 	_loading = YES;
 	[_stories release], _stories = [[NSMutableArray alloc] init];
 	[self parseXMLFileAtURL:@"http://feeds.feedburner.com/DisapprovingRabbits"];
+}
+
+-(void)sleep {
+	currentTitle = nil;
+	currentDate = nil;
+	currentSummary = nil;
+	currentLink = nil;
+	_loading = NO;
+	_stories = nil;
 }
 
 - (void)didMoveToPhoto:(id<TTPhoto>)photo fromPhoto:(id<TTPhoto>)fromPhoto {
@@ -357,6 +384,7 @@ static NSString* kAppId = @"158131707534769";
 
 	_bannerView.delegate = nil;
 	[_bannerView release], _bannerView = nil;
+	[popoverController release], popoverController = nil;
 	
 	[_stories release], _stories = nil;
 	
@@ -396,6 +424,49 @@ static NSString* kAppId = @"158131707534769";
 - (void)hideBarsAnimationDidStop {
 	[super hideBarsAnimationDidStop];
 	[self hideADBanner];
+}
+
+- (TTThumbsViewController*)createThumbsViewController {
+	return [[[DisapprovingRabbitsThumbsController alloc] initWithDelegate:self] autorelease];
+}
+
+- (void)showThumbnails {
+	NSString* URL = [self URLForThumbnails];
+	if (!_thumbsController) {
+		// The photo source had no URL mapping in TTURLMap, so we let the subclass show the thumbs
+		_thumbsController = [[self createThumbsViewController] retain];
+		_thumbsController.photoSource = _photoSource;
+	}
+	
+	if ([self.navigationController isKindOfClass:[TTNavigationController class]]) {
+		[(TTNavigationController*)self.navigationController
+		 pushViewController: _thumbsController
+		 animatedWithTransition: UIViewAnimationTransitionCurlDown];
+	} else {
+		if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+			if(!self.popoverController) {
+				UIPopoverController *controller = [[UIPopoverController alloc] initWithContentViewController:_thumbsController];
+				self.popoverController = controller;          
+				popoverController.delegate = self;
+				[popoverController presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem
+										  permittedArrowDirections:UIPopoverArrowDirectionUp
+														  animated:YES];
+				[controller release];
+			} else {
+				[self.popoverController dismissPopoverAnimated:YES];
+				self.popoverController = nil;
+			}
+		} else {
+			[self.navigationController pushViewController:_thumbsController animated:YES];
+		}
+    }
+}
+
+#pragma mark -
+#pragma mark UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+	self.popoverController = nil;
 }
 
 @end

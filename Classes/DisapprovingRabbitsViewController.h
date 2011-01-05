@@ -15,11 +15,20 @@
 #import "Three20UI/Three20UI.h"
 #import <UIKit/UIKit.h>
 
+@interface DisapprovingRabbitsThumbsController : TTThumbsViewController
+{
+
+}
+
+@end
+
+
 @interface DisapprovingRabbitsViewController : TTPhotoViewController <DisapprovingRabbitsImgSrcParserDelegate
 																		,ADBannerViewDelegate
 																		,FBDialogDelegate
 																		,FBSessionDelegate
-																		,NSXMLParserDelegate> {
+																		,NSXMLParserDelegate
+																		,UIPopoverControllerDelegate> {
 	
 	BOOL _loading;
 	
@@ -34,9 +43,9 @@
 	NSMutableString* currentLink;
 	
 	NSMutableData* _receivedData;
+																			
+	UIPopoverController *popoverController;
 	
-	
-
 	ADBannerView *_bannerView;
 	UIImageView *_facebookImageView;
 	Facebook *_facebook;
@@ -45,9 +54,11 @@
 	
 @property(nonatomic,retain)IBOutlet ADBannerView *bannerView;
 @property(nonatomic,retain)Facebook *facebook;
+@property(nonatomic,retain)UIPopoverController *popoverController;
 
 -(IBAction)facebookClick;
 -(void)reload;
+-(void)sleep;
 
 
 @end
